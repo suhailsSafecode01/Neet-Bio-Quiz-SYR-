@@ -1,0 +1,15 @@
+{
+  "name": "Specimen Log — NEET Biology Daily Quiz",
+  "short_name": "Bio Quiz",
+  "description": "Free daily NEET Biology quiz practice — a fresh 10-question set every day.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F3E8",
+  "theme_color": "#1F3A2E",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

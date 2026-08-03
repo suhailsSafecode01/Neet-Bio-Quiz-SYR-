@@ -257,6 +257,151 @@ function renderReview() {
   reviewList.classList.remove("hidden");
 }
 
+// ---------- CERTIFICATE ----------
+function drawCertificate(name) {
+  const canvas = document.createElement("canvas");
+  const W = 1400, H = 990;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext("2d");
+
+  // background
+  ctx.fillStyle = "#F7F3E8";
+  ctx.fillRect(0, 0, W, H);
+
+  // outer border
+  ctx.strokeStyle = "#1F3A2E";
+  ctx.lineWidth = 10;
+  ctx.strokeRect(30, 30, W - 60, H - 60);
+
+  // inner gold border
+  ctx.strokeStyle = "#C9A24B";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(55, 55, W - 110, H - 110);
+
+  // corner motifs (two overlapping circles, echoing the site's icon)
+  function motif(cx, cy, r) {
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = "#4C7A54";
+    ctx.beginPath(); ctx.arc(cx - r * 0.4, cy, r, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#C1443C";
+    ctx.beginPath(); ctx.arc(cx + r * 0.4, cy, r, 0, Math.PI * 2); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  motif(150, 150, 34);
+  motif(W - 150, 150, 34);
+
+  ctx.textAlign = "center";
+
+  // eyebrow
+  ctx.fillStyle = "#4C7A54";
+  ctx.font = "600 22px 'IBM Plex Mono', monospace";
+  ctx.fillText("@ AIMERS BY SYR", W / 2, 160);
+
+  // title
+  ctx.fillStyle = "#1F3A2E";
+  ctx.font = "700 64px Fraunces, serif";
+  ctx.fillText("Certificate of Participation", W / 2, 250);
+
+  // divider
+  ctx.strokeStyle = "#C9A24B";
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(W / 2 - 120, 285); ctx.lineTo(W / 2 + 120, 285); ctx.stroke();
+
+  // "this certifies that"
+  ctx.fillStyle = "#5B554A";
+  ctx.font = "400 26px 'Source Sans 3', sans-serif";
+  ctx.fillText("This certifies that", W / 2, 350);
+
+  // participant name
+  ctx.fillStyle = "#1F3A2E";
+  ctx.font = "700 56px Fraunces, serif";
+  let displayName = name && name.trim() ? name.trim() : "Participant";
+  ctx.fillText(displayName, W / 2, 430);
+
+  // underline beneath name
+  const nameWidth = ctx.measureText(displayName).width;
+  ctx.strokeStyle = "#D8CDB6";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - nameWidth / 2 - 20, 452);
+  ctx.lineTo(W / 2 + nameWidth / 2 + 20, 452);
+  ctx.stroke();
+
+  // body text
+  ctx.fillStyle = "#5B554A";
+  ctx.font = "400 26px 'Source Sans 3', sans-serif";
+  const bodyLine1 = "has successfully completed a daily NEET Biology practice quiz,";
+  const bodyLine2 = `scoring ${score} out of ${dailyQuiz.length} on ${prettyDate(TODAY)}.`;
+  ctx.fillText(bodyLine1, W / 2, 505);
+  ctx.fillText(bodyLine2, W / 2, 540);
+
+  // signatures
+  ctx.textAlign = "left";
+  const sigY = H - 165;
+  const leftX = 200;
+  const rightX = W - 200;
+
+  // left signature (CEO)
+  ctx.fillStyle = "#1F3A2E";
+  ctx.font = "700 42px 'Dancing Script', cursive";
+  ctx.textAlign = "center";
+  ctx.fillText("Suhail Yousuf", leftX, sigY);
+  ctx.strokeStyle = "#2B2620";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(leftX - 130, sigY + 20); ctx.lineTo(leftX + 130, sigY + 20); ctx.stroke();
+  ctx.fillStyle = "#5B554A";
+  ctx.font = "600 20px 'Source Sans 3', sans-serif";
+  ctx.fillText("Suhail Yousuf — Founder & CEO", leftX, sigY + 50);
+
+  // right signature (AI Curriculum Lead)
+  ctx.fillStyle = "#1F3A2E";
+  ctx.font = "700 42px 'Dancing Script', cursive";
+  ctx.fillText("A. Rai", rightX, sigY);
+  ctx.beginPath(); ctx.moveTo(rightX - 130, sigY + 20); ctx.lineTo(rightX + 130, sigY + 20); ctx.stroke();
+  ctx.fillStyle = "#5B554A";
+  ctx.font = "600 20px 'Source Sans 3', sans-serif";
+  ctx.fillText("A. Rai — AI Curriculum Lead", rightX, sigY + 50);
+
+  // footer
+  ctx.fillStyle = "#4C7A54";
+  ctx.font = "500 18px 'IBM Plex Mono', monospace";
+  ctx.fillText(`Issued ${prettyDate(TODAY)} · Day ${dateStringToDayIndex(TODAY) + 1}`, W / 2, H - 60);
+
+  return canvas;
+}
+
+function ensureFontsReady(callback) {
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.load("700 42px 'Dancing Script'").then(() => {
+      document.fonts.load("700 64px Fraunces").then(callback).catch(callback);
+    }).catch(callback);
+  } else {
+    setTimeout(callback, 300);
+  }
+}
+
+function renderCertificate() {
+  const name = document.getElementById("certNameInput").value;
+  const wrap = document.getElementById("certPreviewWrap");
+  wrap.innerHTML = "";
+  ensureFontsReady(() => {
+    const canvas = drawCertificate(name);
+    wrap.appendChild(canvas);
+
+    const downloadBtn = document.createElement("button");
+    downloadBtn.className = "btn-secondary cert-download-btn";
+    downloadBtn.textContent = "Download Certificate";
+    downloadBtn.addEventListener("click", () => {
+      const link = document.createElement("a");
+      link.download = `NEET-Biology-Certificate-${(name || "participant").trim().replace(/\s+/g, "-")}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+    wrap.appendChild(downloadBtn);
+  });
+}
+
 // ---------- EVENTS ----------
 startBtn.addEventListener("click", () => {
   buildProgressDots();
@@ -271,6 +416,7 @@ reviewBtn.addEventListener("click", () => {
   renderReview();
   reviewBtn.classList.add("hidden");
 });
+document.getElementById("certBtn").addEventListener("click", renderCertificate);
 
 // ---------- INIT ----------
 initHeader();

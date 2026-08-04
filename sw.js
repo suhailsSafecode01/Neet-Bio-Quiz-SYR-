@@ -1,4 +1,4 @@
-const CACHE_NAME = "neet-bio-quiz-v2";
+const CACHE_NAME = "neet-bio-quiz-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -8,6 +8,9 @@ const ASSETS = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
+  "./ca.html",
+  "./ca-app.js",
+  "./ca-questions.js",
 ];
 
 self.addEventListener("install", (event) => {

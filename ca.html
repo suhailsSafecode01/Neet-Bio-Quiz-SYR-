@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CA Foundation Daily Quiz Practice — Ledger Log</title>
+<meta name="description" content="Free daily CA Foundation quiz practice. A new 10-question set every day covering Accounting, Business Law, Quantitative Aptitude, and Business Economics." />
+<meta name="keywords" content="CA Foundation quiz, CA Foundation practice, CA Foundation daily quiz, CA aspirants, chartered accountant foundation prep" />
+<meta property="og:title" content="Ledger Log — CA Foundation Daily Quiz" />
+<meta property="og:description" content="A fresh 10-question CA Foundation quiz, every day. Free, and the same quiz for everyone." />
+<meta property="og:url" content="https://suhailssafecode01.github.io/Neet-Bio-Quiz-SYR-/ca.html" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Ledger Log — CA Foundation Daily Quiz" />
+<meta name="twitter:description" content="A fresh 10-question CA Foundation quiz, every day." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#1F3A2E">
+</head>
+<body>
+
+  <header class="masthead">
+    <span class="author-tag">Suhail Yousuf</span>
+    <div class="masthead-inner">
+      <p class="eyebrow">LEDGER LOG · CA FOUNDATION</p>
+      <h1 class="wordmark">Ledger Log</h1>
+      <p class="tagline">One fresh set of ten, logged daily. Accounting, Law, Quant &amp; Economics — same set for every visitor, every day.</p>
+      <div class="meta-row">
+        <span class="meta-item" id="dateStamp">—</span>
+        <span class="meta-divider">·</span>
+        <span class="meta-item" id="dayCounter">Day —</span>
+      </div>
+    </div>
+    <div class="streak-widget" id="streakWidget" aria-label="Study streak">
+      <span class="streak-label">Streak</span>
+      <div class="streak-rings" id="streakRings"></div>
+      <span class="streak-count" id="streakCount">0 days</span>
+    </div>
+  </header>
+
+  <p class="cross-link-bar"><a href="index.html">← Studying NEET Biology instead? Switch here</a></p>
+
+  <main>
+    <!-- INTRO / START SCREEN -->
+    <section id="introScreen" class="screen">
+      <div class="specimen-card intro-card">
+        <div class="tag-corner"></div>
+        <p class="catalog-tag">TODAY'S ENTRY</p>
+        <h2 class="intro-title">10 CA Foundation Questions, Ready for Study</h2>
+        <p class="intro-copy">Pulled from Accounting, Business Law, Quantitative Aptitude, and Business Economics — the four CA Foundation papers, rotating daily.</p>
+        <button class="btn-primary" id="startBtn">Begin today's log</button>
+      </div>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quizScreen" class="screen hidden">
+      <div class="progress-row" id="progressRow"></div>
+      <div class="specimen-card quiz-card">
+        <div class="tag-corner"></div>
+        <div class="card-head">
+          <span class="catalog-tag" id="qIndexTag">Q 01/10</span>
+          <span class="topic-tag" id="qTopicTag">Topic</span>
+        </div>
+        <h2 class="question-text" id="questionText">Question text</h2>
+        <div class="options" id="optionsList"></div>
+        <p class="explain" id="explainBox"></p>
+        <div class="card-foot">
+          <button class="btn-secondary hidden" id="nextBtn">Next entry →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS SCREEN -->
+    <section id="resultsScreen" class="screen hidden">
+      <div class="specimen-card results-card">
+        <div class="tag-corner"></div>
+        <p class="catalog-tag">LOG COMPLETE</p>
+        <h2 class="results-score" id="resultsScore">0 / 10</h2>
+        <p class="results-copy" id="resultsCopy">Nice work. Come back tomorrow for a fresh set.</p>
+        <button class="btn-secondary" id="reviewBtn">Review answers</button>
+      </div>
+      <div class="review-list" id="reviewList"></div>
+      <div class="cert-box" id="certBox">
+        <p class="catalog-tag">EARN YOUR CERTIFICATE</p>
+        <p class="cert-copy">Enter your name to generate a personalized Certificate of Participation from @aimers by SYR.</p>
+        <input type="text" id="certNameInput" class="cert-input" placeholder="Your full name" maxlength="60" />
+        <button class="btn-primary" id="certBtn">Generate Certificate</button>
+        <div class="cert-preview-wrap" id="certPreviewWrap"></div>
+      </div>
+    </section>
+  </main>
+
+  <section class="share-section">
+    <div class="specimen-card share-card">
+      <div class="tag-corner"></div>
+      <p class="catalog-tag">SHARE &amp; INSTALL</p>
+      <h2 class="share-title">Get this on your phone in one tap</h2>
+      <p class="share-copy">Scan the code to open the site, or use the buttons to share the link or install it as an app — no app store needed.</p>
+      <div class="share-qr-wrap" id="shareQrWrap"></div>
+      <div class="share-actions">
+        <button class="btn-primary hidden" id="installBtn">Install App</button>
+        <button class="btn-secondary hidden" id="shareBtn">Share Link</button>
+        <button class="btn-secondary" id="copyLinkBtn">Copy Link</button>
+      </div>
+      <p class="share-note" id="shareNote"></p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Built for daily CA Foundation practice. Questions rotate on a fixed schedule so everyone studies the same set each day.</p>
+  </footer>
+
+  <script src="ca-questions.js"></script>
+  <script src="ca-app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
